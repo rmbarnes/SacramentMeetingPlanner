@@ -1,0 +1,14 @@
+﻿@{
+    var db = Database.Open("Meetings");
+    var selectedData = db.Query("SELECT * FROM Meeting");
+    var grid = new WebGrid(source: selectedData);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    @grid.GetHtml();
+</body>
+</html>
