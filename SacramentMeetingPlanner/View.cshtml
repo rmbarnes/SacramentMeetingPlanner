@@ -85,53 +85,54 @@
     }
 }
 
-<h2>Edit Plan</h2>
+<h2>View Plan</h2>
+<p><a href="~/Plans">Return to Plans</a></p>
 @Html.ValidationSummary()
-<fieldset>
+<fieldset class="detailPage">
     <legend>Sacrament Meeting Details</legend>
 
     <p>
         <span>Date:</span>
-        <span>@Date.ToString("MM/dd/yyyy")</span>
+        <span class="details">@Date.ToString("MM/dd/yyyy")</span>
     </p>
 
     <p>
         <span>Conducting:</span>
-        <span>@Conducting</span>
+        <span class="details">@Conducting</span>
     </p>
 
     <p>
         <span>Opening Hymn:</span>
-        <span>@OHymn</span>
+        <span class="details">@OHymn</span>
     </p>
 
     <p>
         <span>Opening Prayer:</span>
-        <span>@OPrayer</span>
+        <span class="details">@OPrayer</span>
     </p>
 
     <p>
         <span>Sacrament Hymn:</span>
-        <span>@SHymn</span>
+        <span class="details">@SHymn</span>
     </p>
 
     <p>
         <span>Intermediate Hymn:</span>
-        <span>@IHymn</span>
+        <span class="details">@IHymn</span>
     </p>
 
     <p>
         <span>Closing Hymn:</span>
-        <span>@CHymn</span>
+        <span class="details">@CHymn</span>
     </p>
 
     <p>
         <span>Closing Prayer:</span>
-        <span>@CPrayer</span>
+        <span class="details">@CPrayer</span>
     </p>
 
     <input type="hidden" name="meetingId" value="@meetingId" />
 
 </fieldset>
-<p><a href="~/Plans">Return to Plans</a></p>
+
 
