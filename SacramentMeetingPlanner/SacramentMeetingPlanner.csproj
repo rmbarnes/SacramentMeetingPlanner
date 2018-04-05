@@ -97,6 +97,7 @@
     <Content Include="Plans.cshtml" />
     <Content Include="Styles\Planner.css" />
     <Content Include="Update.cshtml" />
+    <Content Include="View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

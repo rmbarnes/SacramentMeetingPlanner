@@ -87,53 +87,51 @@
 
 <h2>Edit Plan</h2>
 @Html.ValidationSummary()
-<form method="post">
-    <fieldset>
-        <legend>Sacrament Meeting Details</legend>
+<fieldset>
+    <legend>Sacrament Meeting Details</legend>
 
-        <p>
-            <label for="Date">Date:</label>
-            <input type="date" name="Date" value="@Date" />
-        </p>
+    <p>
+        <span>Date:</span>
+        <span>@Date.ToString("MM/dd/yyyy")</span>
+    </p>
 
-        <p>
-            <label for="OHymn">Opening Hymn:</label>
-            <input type="text" name="OHymn" value="@OHymn" />
-        </p>
+    <p>
+        <span>Conducting:</span>
+        <span>@Conducting</span>
+    </p>
 
-        <p>
-            <label for="OPrayer">Opening Prayer:</label>
-            <input type="text" name="OPrayer" value="@OPrayer" />
-        </p>
+    <p>
+        <span>Opening Hymn:</span>
+        <span>@OHymn</span>
+    </p>
 
-        <p>
-            <label for="Conducting">Conducting:</label>
-            <input type="text" name="Conducting" value="@Conducting" />
-        </p>
+    <p>
+        <span>Opening Prayer:</span>
+        <span>@OPrayer</span>
+    </p>
 
-        <p>
-            <label for="SHymn">Sacrament Hymn:</label>
-            <input type="text" name="SHymn" value="@SHymn" />
-        </p>
+    <p>
+        <span>Sacrament Hymn:</span>
+        <span>@SHymn</span>
+    </p>
 
-        <p>
-            <label for="IHymn">Intermediate Hymn:</label>
-            <input type="text" name="IHymn" value="@IHymn" />
-        </p>
+    <p>
+        <span>Intermediate Hymn:</span>
+        <span>@IHymn</span>
+    </p>
 
-        <p>
-            <label for="CHymn">Closing Hymn:</label>
-            <input type="text" name="CHymn" value="@CHymn" />
-        </p>
+    <p>
+        <span>Closing Hymn:</span>
+        <span>@CHymn</span>
+    </p>
 
-        <p>
-            <label for="CPrayer">Closing Prayer:</label>
-            <input type="text" name="CPrayer" value="@CPrayer" />
-        </p>
+    <p>
+        <span>Closing Prayer:</span>
+        <span>@CPrayer</span>
+    </p>
 
-        <input type="hidden" name="meetingId" value="@meetingId" />
+    <input type="hidden" name="meetingId" value="@meetingId" />
 
-        <p><input type="submit" name="buttonSubmit" value="Submit Changes" /></p>
-    </fieldset>
-</form>
+</fieldset>
 <p><a href="~/Plans">Return to Plans</a></p>
+

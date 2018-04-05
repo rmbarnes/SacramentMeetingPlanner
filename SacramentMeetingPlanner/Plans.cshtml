@@ -6,37 +6,11 @@
     var selectCommand = "SELECT * FROM Meeting";
     var searchTerm = "";
 
-    if (!Request.QueryString["searchGenre"].IsEmpty())
-    {
-        selectCommand = "SELECT * FROM Movies WHERE Genre = @0";
-        searchTerm = Request.QueryString["searchGenre"];
-    }
-
-    if (!Request.QueryString["searchTitle"].IsEmpty())
-    {
-        selectCommand = "SELECT * FROM Movies WHERE Title LIKE @0";
-        searchTerm = "%" + Request.QueryString["searchTitle"] + "%";
-    }
-
     var selectedData = db.Query(selectCommand, searchTerm);
     var grid = new WebGrid(source: selectedData, defaultSort: "Date", rowsPerPage: 3);
 }
 
 <h2>List of Plans</h2>
-<form method="get">
-    <div>
-        <label for="searchGenre">Genre to look for:</label>
-        <input type="text" name="searchGenre" value="@Request.QueryString["searchGenre"]" />
-        <input type="Submit" value="Search Genre" /><br />
-        (Leave blank to list all movies.)<br />
-    </div>
-
-    <div>
-        <label for="SearchTitle">Movie title contains the following:</label>
-        <input type="text" name="searchTitle" value="@Request.QueryString["searchTitle"]" />
-        <input type="Submit" value="Search Title" /><br />
-    </div>
-</form>
 
 <div>
     @grid.GetHtml(
@@ -44,18 +18,19 @@
             headerStyle: "head",
             alternatingRowStyle: "alt",
             columns: grid.Columns(
-        grid.Column(format: @<a href="~/Update?id=@item.ID">Edit</a>),
-                grid.Column("Date"),
+                grid.Column(format: @<a href="~/Update?id=@item.ID">Edit</a>),
+                grid.Column(format: @<a href="~/View?id=@item.ID">View</a>),
+                grid.Column("Date", format:@<text>@item.Date.ToString("MM/dd/yyyy")</text>),
                 grid.Column("Conducting"),
-                grid.Column("OHymn"),
-                grid.Column("OPrayer"),
-                grid.Column("SHymn"),
-                grid.Column("IHymn"),
-                grid.Column("CHymn"),
-                grid.Column("CPrayer"),
+                grid.Column("OHymn", "Opening Hymn"),
+                grid.Column("OPrayer", "Opening Hymn"),
+                grid.Column("SHymn", "Sacrament Hymn"),
+                grid.Column("IHymn", "Intermediate Hymn"),
+                grid.Column("CHymn", "Closing Hymn"),
+                grid.Column("CPrayer", "Closing Hymn"),
 
                 grid.Column(format: @<a href="~/Delete?id=@item.ID">Delete</a>)
                             )
                         )
 </div>
-<p><a href="~/Update">Update Plan</a></p>
+<p><a href="~/Create">Add Plan</a></p>
