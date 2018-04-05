@@ -31,6 +31,7 @@
                 CHymn = row.CHymn;
                 CPrayer = row.CPrayer;
                 Conducting = row.Conducting;
+                Date = row.Date;
             }
             else
             {
@@ -64,7 +65,12 @@
 
         dateString = Request.Form["Date"];
 
-        Date = DateTime.Parse(dateString);
+        try {
+            Date = DateTime.Parse(dateString);
+        } catch
+        {
+            Date = DateTime.Now;
+        }
         OHymn = Request.Form["OHymn"];
         OPrayer = Request.Form["OPrayer"];
         Conducting = Request.Form["Conducting"];
@@ -78,7 +84,7 @@
         if (Validation.IsValid())
         {
             var db = Database.Open("Meetings");
-            var updateCommand = "UPDATE Meeting SET OHymn=@0, CHymn=@1, SHymn=@2, IHymn=@3, Conducting=@4, Date=@5, OPrayer=@6, CPrayer=@7, WHERE Id=@8";
+            var updateCommand = "UPDATE Meeting SET OHymn=@0, CHymn=@1, SHymn=@2, IHymn=@3, Conducting=@4, Date=@5, OPrayer=@6, CPrayer=@7 WHERE Id=@8";
             db.Execute(updateCommand, OHymn, CHymn, SHymn, IHymn, Conducting, Date, OPrayer, CPrayer, meetingId);
             Response.Redirect("~/Plans");
         }
@@ -93,7 +99,7 @@
 
         <p>
             <label for="Date">Date:</label>
-            <input type="date" name="Date" value="@Date" />
+            <input type="date" name="Date" value="@Date.ToString("yyyy-MM-dd")" />
         </p>
 
         <p>
