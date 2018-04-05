@@ -2,9 +2,14 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = "Delete Plan";
 
-    var title = "";
-    var genre = "";
-    var year = "";
+    var OHymn = "";
+    var OPrayer = "";
+    var SHymn = "";
+    var IHymn = "";
+    var CHymn = "";
+    var CPrayer = "";
+    var Conducting = "";
+    var Date = DateTime.Now;
     var meetingId = "";
 
     if (!IsPost)
@@ -17,9 +22,13 @@
             var row = db.QuerySingle(dbCommand, meetingId);
             if (row != null)
             {
-                title = row.Title;
-                genre = row.Genre;
-                year = row.Year;
+                OHymn = row.OHymn;
+                OPrayer = row.OPrayer;
+                SHymn = row.SHymn;
+                IHymn = row.IHymn;
+                CHymn = row.CHymn;
+                CPrayer = row.CPrayer;
+                Conducting = row.Conducting;
             }
             else
             {
@@ -60,18 +69,38 @@
         <legend>Sacrament Meeting Details</legend>
 
         <p>
-            <span>Title:</span>
-            <span>@title</span>
+            <span>Opening Hymn:</span>
+            <span>@OHymn</span>
         </p>
 
         <p>
-            <span>Genre:</span>
-            <span>@genre</span>
+            <span>Opening Prayer:</span>
+            <span>@OPrayer</span>
         </p>
 
         <p>
-            <span>Year:</span>
-            <span>@year</span>
+            <span>Conducting:</span>
+            <span>@Conducting</span>
+        </p>
+
+        <p>
+            <span>Sacrament Hymn:</span>
+            <span>@SHymn</span>
+        </p>
+
+        <p>
+            <span>Intermediate Hymn:</span>
+            <span>@IHymn</span>
+        </p>
+
+        <p>
+            <span>Closing Hymn:</span>
+            <span>@CHymn</span>
+        </p>
+
+        <p>
+            <span>Closing Prayer:</span>
+            <span>@CPrayer</span>
         </p>
 
         <input type="hidden" name="meetingId" value="@meetingId" />

@@ -2,9 +2,14 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = "Edit Plan";
 
-    var title = "";
-    var genre = "";
-    var year = "";
+    var OHymn = "";
+    var OPrayer = "";
+    var SHymn = "";
+    var IHymn = "";
+    var CHymn = "";
+    var CPrayer = "";
+    var Conducting = "";
+    var Date = DateTime.Now;
     var meetingId = "";
 
     if (!IsPost)
@@ -18,9 +23,13 @@
 
             if (row != null)
             {
-                title = row.Title;
-                genre = row.Genre;
-                year = row.Year;
+                OHymn = row.OHymn;
+                OPrayer = row.OPrayer;
+                SHymn = row.SHymn;
+                IHymn = row.IHymn;
+                CHymn = row.CHymn;
+                CPrayer = row.CPrayer;
+                Conducting = row.Conducting;
             }
             else
             {
@@ -43,21 +52,30 @@
 
     if (IsPost)
     {
-        Validation.RequireField("title", "You must enter a title");
-        Validation.RequireField("genre", "Genre is required");
-        Validation.RequireField("year", "You haven't entered a year");
-        Validation.RequireField("movieid", "No movie ID was submitted!");
+        Validation.RequireField("OHymn", "Opening Hymn is a required field");
+        Validation.RequireField("OPrayer", "Don't forget to invite someone to say the opening prayer!");
+        Validation.RequireField("Conducting", "Someone will need to conduct the meeting");
+        Validation.RequireField("SHymn", "You will need to choose a hymn to prepare for the Sacrament");
+        Validation.RequireField("CHymn", "It is nice to include a closing hymn");
+        Validation.RequireField("CPrayer", "You must select someone for the closing prayer");
 
-        title = Request.Form["title"];
-        genre = Request.Form["genre"];
-        year = Request.Form["year"];
+        Validation.RequireField("meetingId", "No meeting ID was submitted!");
+
+        OHymn = Request.Form["OHymn"];
+        OPrayer = Request.Form["OPrayer"];
+        Conducting = Request.Form["Conducting"];
+        SHymn = Request.Form["SHymn"];
+        IHymn = Request.Form["IHymn"];
+        CHymn = Request.Form["CHymn"];
+        CPrayer = Request.Form["CPrayer"];
+
         meetingId = Request.Form["movieId"];
 
         if (Validation.IsValid())
         {
             var db = Database.Open("Meetings");
-            var updateCommand = "UPDATE Meeting SET Title=@0, Genre=@1, Year=@2 WHERE Id=@3";
-            db.Execute(updateCommand, title, genre, year, meetingId);
+            var updateCommand = "UPDATE Meeting SET OHymn=@0, CHymn=@1, SHymn=@2, IHymn=@3, Conducting=@4, Date=@5, OPrayer=@6, CPrayer=@7, WHERE Id=@8";
+            db.Execute(updateCommand, OHymn, CHymn, SHymn, IHymn, Conducting, Date, OPrayer, CPrayer, meetingId);
             Response.Redirect("~/Plans");
         }
     }
@@ -70,18 +88,33 @@
         <legend>Sacrament Meeting Details</legend>
 
         <p>
-            <label for="title">Title:</label>
-            <input type="text" name="title" value="@title" />
+            <label for="OHymn">Opening Hymn:</label>
+            <input type="text" name="OHymn" value="@OHymn" />
         </p>
 
         <p>
-            <label for="genre">Genre:</label>
-            <input type="text" name="genre" value="@genre" />
+            <label for="OPrayer">Opening Prayer:</label>
+            <input type="text" name="OPrayer" value="@OPrayer" />
         </p>
 
         <p>
-            <label for="year">Year:</label>
-            <input type="text" name="year" value="@year" />
+            <label for="SHymn">Sacrament Hymn:</label>
+            <input type="text" name="SHymn" value="@SHymn" />
+        </p>
+
+        <p>
+            <label for="IHymn">Intermediate Hymn:</label>
+            <input type="text" name="IHymn" value="@IHymn" />
+        </p>
+
+        <p>
+            <label for="CHymn">Closing Hymn:</label>
+            <input type="text" name="CHymn" value="@CHymn" />
+        </p>
+
+        <p>
+            <label for="CPrayer">Closing Prayer:</label>
+            <input type="text" name="CPrayer" value="@CPrayer" />
         </p>
 
         <input type="hidden" name="meetingId" value="@meetingId" />
