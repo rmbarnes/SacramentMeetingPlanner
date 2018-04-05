@@ -1,20 +1,20 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
-    Page.Title = "Edit a Movie";
+    Page.Title = "Edit Plan";
 
     var title = "";
     var genre = "";
     var year = "";
-    var movieId = "";
+    var meetingId = "";
 
     if (!IsPost)
     {
         if (!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].IsInt())
         {
-            movieId = Request.QueryString["ID"];
-            var db = Database.Open("WebPagesMovies");
-            var dbCommand = "SELECT * FROM Movies WHERE ID = @0";
-            var row = db.QuerySingle(dbCommand, movieId);
+            meetingId = Request.QueryString["ID"];
+            var db = Database.Open("Meetings");
+            var dbCommand = "SELECT * FROM Meeting WHERE ID = @0";
+            var row = db.QuerySingle(dbCommand, meetingId);
 
             if (row != null)
             {
@@ -24,7 +24,7 @@
             }
             else
             {
-                Validation.AddFormError("No movie was selected.");
+                Validation.AddFormError("No plan was selected.");
                 // If you are using a version of ASP.NET Web Pages 2 that's
                 // earlier than the RC release, comment out the preceding
                 // statement and uncomment the following one.
@@ -33,7 +33,7 @@
         }
         else
         {
-            Validation.AddFormError("No movie was selected.");
+            Validation.AddFormError("No plan was selected.");
             // If you are using a version of ASP.NET Web Pages 2 that's
             // earlier than the RC release, comment out the preceding
             // statement and uncomment the following one.
@@ -51,23 +51,23 @@
         title = Request.Form["title"];
         genre = Request.Form["genre"];
         year = Request.Form["year"];
-        movieId = Request.Form["movieId"];
+        meetingId = Request.Form["movieId"];
 
         if (Validation.IsValid())
         {
-            var db = Database.Open("WebPagesMovies");
-            var updateCommand = "UPDATE Movies SET Title=@0, Genre=@1, Year=@2 WHERE Id=@3";
-            db.Execute(updateCommand, title, genre, year, movieId);
-            Response.Redirect("~/Movies");
+            var db = Database.Open("Meetings");
+            var updateCommand = "UPDATE Meeting SET Title=@0, Genre=@1, Year=@2 WHERE Id=@3";
+            db.Execute(updateCommand, title, genre, year, meetingId);
+            Response.Redirect("~/Plans");
         }
     }
 }
 
-<h2>Edit a Movie</h2>
+<h2>Edit Plan</h2>
 @Html.ValidationSummary()
 <form method="post">
     <fieldset>
-        <legend>Movie Information</legend>
+        <legend>Sacrament Meeting Details</legend>
 
         <p>
             <label for="title">Title:</label>
@@ -84,9 +84,9 @@
             <input type="text" name="year" value="@year" />
         </p>
 
-        <input type="hidden" name="movieid" value="@movieId" />
+        <input type="hidden" name="meetingId" value="@meetingId" />
 
         <p><input type="submit" name="buttonSubmit" value="Submit Changes" /></p>
     </fieldset>
 </form>
-<p><a href="~/Movies">Return to movie listing</a></p>
+<p><a href="~/Plans">Return to Plans</a></p>

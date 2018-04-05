@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
-    Page.Title = "Add a Movie";
+    Page.Title = "Create Plan";
 
     Validation.RequireField("title", "You must enter a title");
     Validation.RequireField("genre", "Genre is required");
@@ -18,20 +18,20 @@
             genre = Request.Form["genre"];
             year = Request.Form["year"];
 
-            var db = Database.Open("WebPagesMovies");
-            var insertCommand = "INSERT INTO Movies (Title, Genre, Year) VALUES(@0, @1, @2)";
+            var db = Database.Open("Meetings");
+            var insertCommand = "INSERT INTO Meeting (OHymn, CHymn, Year) VALUES(@0, @1, @2)";
             db.Execute(insertCommand, title, genre, year);
 
-            Response.Redirect("~/Movies");
+            Response.Redirect("~/Plans");
         }
     }
 }
 
-<h2>Add a Movie</h2>
+<h2>Create a Sacrament Meeting Plan</h2>
 @Html.ValidationSummary()
 <form method="post">
     <fieldset>
-        <legend>Movie Information</legend>
+        <legend>Meeting Plan Details</legend>
         <p>
             <label for="title">Title:</label>
             <input type="text" name="title" value="@Request.Form["title"]" />
@@ -47,6 +47,6 @@
             <input type="text" name="year" value="@Request.Form["year"]" />
             @Html.ValidationMessage("year")
 
-        <p><input type="submit" name="buttonSubmit" value="Add Movie" /></p>
+        <p><input type="submit" name="buttonSubmit" value="Add Sacrament Meeting Plan" /></p>
     </fieldset>
 </form>

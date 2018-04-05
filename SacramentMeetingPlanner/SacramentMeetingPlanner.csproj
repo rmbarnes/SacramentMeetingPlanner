@@ -95,6 +95,7 @@
     <Content Include="Delete.cshtml" />
     <None Include="packages.config" />
     <Content Include="Plans.cshtml" />
+    <Content Include="Styles\Planner.css" />
     <Content Include="Update.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

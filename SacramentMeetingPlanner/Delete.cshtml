@@ -1,20 +1,20 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
-    Page.Title = "Delete a Movie";
+    Page.Title = "Delete Plan";
 
     var title = "";
     var genre = "";
     var year = "";
-    var movieId = "";
+    var meetingId = "";
 
     if (!IsPost)
     {
         if (!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].AsInt() > 0)
         {
-            movieId = Request.QueryString["ID"];
-            var db = Database.Open("WebPagesMovies");
-            var dbCommand = "SELECT * FROM Movies WHERE ID = @0";
-            var row = db.QuerySingle(dbCommand, movieId);
+            meetingId = Request.QueryString["ID"];
+            var db = Database.Open("Meetings");
+            var dbCommand = "SELECT * FROM Meeting WHERE ID = @0";
+            var row = db.QuerySingle(dbCommand, meetingId);
             if (row != null)
             {
                 title = row.Title;
@@ -23,7 +23,7 @@
             }
             else
             {
-                Validation.AddFormError("No movie was found for that ID.");
+                Validation.AddFormError("No meeting was found for that ID.");
                 // If you are using a version of ASP.NET Web Pages 2 that's
                 // earlier than the RC release, comment out the preceding
                 // statement and uncomment the following one.
@@ -32,7 +32,7 @@
         }
         else
         {
-            Validation.AddFormError("No movie was found for that ID.");
+            Validation.AddFormError("No meeting was found for that ID.");
             // If you are using a version of ASP.NET Web Pages 2 that's
             // earlier than the RC release, comment out the preceding
             // statement and uncomment the following one.
@@ -42,22 +42,22 @@
 
     if (IsPost && !Request["buttonDelete"].IsEmpty())
     {
-        movieId = Request.Form["movieId"];
-        var db = Database.Open("WebPagesMovies");
-        var deleteCommand = "DELETE FROM Movies WHERE ID = @0";
-        db.Execute(deleteCommand, movieId);
-        Response.Redirect("~/Movies");
+        meetingId = Request.Form["meetingId"];
+        var db = Database.Open("Meetings");
+        var deleteCommand = "DELETE FROM Meeting WHERE ID = @0";
+        db.Execute(deleteCommand, meetingId);
+        Response.Redirect("~/Plans");
     }
 
 }
 
-<h2>Delete a Movie</h2>
+<h2>Delete Plan</h2>
 @Html.ValidationSummary()
-<p><a href="~/Movies">Return to movie listing</a></p>
+<p><a href="~/Plans">Return to list of plans</a></p>
 
 <form method="post">
     <fieldset>
-        <legend>Movie Information</legend>
+        <legend>Sacrament Meeting Details</legend>
 
         <p>
             <span>Title:</span>
@@ -74,7 +74,7 @@
             <span>@year</span>
         </p>
 
-        <input type="hidden" name="movieid" value="@movieId" />
-        <p><input type="submit" name="buttonDelete" value="Delete Movie" /></p>
+        <input type="hidden" name="meetingId" value="@meetingId" />
+        <p><input type="submit" name="buttonDelete" value="Delete Meeting Plan" /></p>
     </fieldset>
 </form>
