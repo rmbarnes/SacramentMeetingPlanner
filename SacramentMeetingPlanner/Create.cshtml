@@ -2,25 +2,41 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = "Create Plan";
 
-    Validation.RequireField("title", "You must enter a title");
-    Validation.RequireField("genre", "Genre is required");
-    Validation.RequireField("year", "You haven't entered a year");
+    Validation.RequireField("OHymn", "You must enter an Opening Hymn");
+    Validation.RequireField("CHymn", "Closing Hymn is required");
+    Validation.RequireField("SHymn", "You haven't entered a Sacrament Hymn");
+    Validation.RequireField("Conducting", "Conductor is required");
+    //Validation.RequireField("Date", "Date is required");
+    Validation.RequireField("OHymn", "Opening Hymn is required");
+    Validation.RequireField("CPrayer", "Closing Prayer is required");
+    Validation.RequireField("OPrayer", "Opening Prayer is required");
 
-    var title = "";
-    var genre = "";
-    var year = "";
+    var OHymn = "";
+    var CHymn = "";
+    var SHymn = "";
+    var IHymn = "";
+    var Conducting = "";
+    DateTime Date = DateTime.Now;
+    var OPrayer = "";
+    var CPrayer = "";
+
 
     if (IsPost)
     {
         if (Validation.IsValid())
         {
-            title = Request.Form["title"];
-            genre = Request.Form["genre"];
-            year = Request.Form["year"];
+            OHymn = Request.Form["OHymn"];
+            CHymn = Request.Form["CHymn"];
+            SHymn = Request.Form["SHymn"];
+            //I might need to do a try catch here if they don't put anything
+            IHymn = Request.Form["IHymn"];
+            Conducting = Request.Form["Conducting"];
+            OPrayer = Request.Form["OPrayer"];
+            CPrayer = Request.Form["CPrayer"];
 
             var db = Database.Open("Meetings");
-            var insertCommand = "INSERT INTO Meeting (OHymn, CHymn, Year) VALUES(@0, @1, @2)";
-            db.Execute(insertCommand, title, genre, year);
+            var insertCommand = "INSERT INTO Meeting (OHymn, CHymn, SHymn, IHymn, Conducting, Date, OPrayer, CPrayer) VALUES(@0, @1, @2, @3, @4, @5, @6, @7)";
+            db.Execute(insertCommand, OHymn, CHymn, SHymn, IHymn, Conducting, Date, OPrayer, CPrayer);
 
             Response.Redirect("~/Plans");
         }
@@ -33,19 +49,45 @@
     <fieldset>
         <legend>Meeting Plan Details</legend>
         <p>
-            <label for="title">Title:</label>
-            <input type="text" name="title" value="@Request.Form["title"]" />
-            @Html.ValidationMessage("title")
+            <label for="OHymn">Opening Hymn:</label>
+            <input type="text" name="OHymn" value="@Request.Form["OHymn"]" />
+            @Html.ValidationMessage("OHymn")
 
         <p>
-            <label for="genre">Genre:</label>
-            <input type="text" name="genre" value="@Request.Form["genre"]" />
-            @Html.ValidationMessage("genre")
+            <label for="CHymn">Closing Hymn:</label>
+            <input type="text" name="CHymn" value="@Request.Form["CHymn"]" />
+            @Html.ValidationMessage("CHymn")
 
         <p>
-            <label for="year">Year:</label>
-            <input type="text" name="year" value="@Request.Form["year"]" />
-            @Html.ValidationMessage("year")
+            <label for="SHymn">Sacrament Hymn:</label>
+            <input type="text" name="SHymn" value="@Request.Form["SHymn"]" />
+            @Html.ValidationMessage("SHymn")
+
+        <p>
+            <label for="IHymn">Intermediate Hymn:</label>
+            <input type="text" name="IHymn" value="@Request.Form["IHymn"]" />
+
+        <p>
+            <label for="Conducting">Conducting:</label>
+            <input type="text" name="Conducting" value="@Request.Form["Conducting"]" />
+            @Html.ValidationMessage("Conducting")
+
+        <p>
+            <label for="Date">Meeting Date:</label>
+            <input type="date" name="Date" value="@Request.Form["Date"]" />
+            @Html.ValidationMessage("Date")
+
+        <p>
+            <label for="OPrayer">Opening Prayer:</label>
+            <input type="text" name="OPrayer" value="@Request.Form["OPrayer"]" />
+            @Html.ValidationMessage("OPrayer")
+
+        <p>
+            <label for="CPrayer">Closing Prayer:</label>
+            <input type="text" name="CPrayer" value="@Request.Form["CPrayer"]" />
+            @Html.ValidationMessage("CPrayer")
+
+
 
         <p><input type="submit" name="buttonSubmit" value="Add Sacrament Meeting Plan" /></p>
     </fieldset>
