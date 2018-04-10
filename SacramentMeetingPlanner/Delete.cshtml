@@ -56,6 +56,7 @@
         var deleteCommand = "DELETE FROM Meeting WHERE ID = @0";
         db.Execute(deleteCommand, meetingId);
         Response.Redirect("~/Plans");
+        //Add delete statement for the speakers table via foriegn key of meetingid
     }
 
 }
