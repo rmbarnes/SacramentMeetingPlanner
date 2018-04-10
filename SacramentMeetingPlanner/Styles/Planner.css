@@ -102,41 +102,6 @@ span.dataDisplay {
     font-weight: bold;
 }
 
-/*.editButton {
-    background-color: #89b0ae;
-    color: white;
-    text-decoration: none;
-    padding: inherit;
-}
-
-    .editButton:hover {
-        background-color: #407076;
-        text-decoration: underline;
-    }*/
-
-
-
-/*input[type=submit] {
-    background-color: #b0c7c9;
-    color: white;
-    font-family: 'Karma', serif;
-    cursor: pointer;
-    border-radius: 5px;
-}*/
-
-    /*input[type=submit]:hover {
-        background-color: #92a69f;
-    }
-
-    input[type=submit].deletePageButton {
-        border-radius: 5px;
-        padding: 5px;
-    }
-
-        input[type=submit].deletePageButton:hover {
-            background-color: red;
-            border-color: red;
-        }*/
 
 /* Add a Plan Button */
 
@@ -154,8 +119,7 @@ p a {
     transition: .25s;
 }
 
-p a:hover {
-    font-size: 1.25em;
+p a:hover, td a:hover, input[type=submit]:hover {
     background-color: #556;
     color: white;
 }
@@ -171,13 +135,29 @@ td a {
     font-size: 1.2em;
     text-decoration: none;
     text-align: center;
-    border-radius: 3px;
+    border-radius: 5px;
     transition: .25s;
 }
- 
-td a:hover {
-    background-color: #556;
+
+/* Edit and Delete Buttons */
+input[type=submit] {
+    margin-top: 20px;
+    background-color: #bbc;
+    padding: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
     color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 3px;
+    transition: .25s;
+    cursor: pointer;
+}
+
+input[type=submit].deletePageButton:hover {
+    background-color: darkred;
+    border-color: darkred;
 }
 
 /* Details Page */
@@ -187,9 +167,8 @@ td a:hover {
 
 .detailPage {
     margin: auto;
-    width: 70%;
+    width: 60%;
 }
-
 
 @media(min-width: 800px) {
     

@@ -90,48 +90,49 @@
 @Html.ValidationSummary()
 <fieldset class="detailPage">
     <legend>Sacrament Meeting Details</legend>
+    <div >
+        <p>
+            <span>Date:</span>
+            <span class="details">@Date.ToString("MM/dd/yyyy")</span>
+        </p>
 
-    <p>
-        <span>Date:</span>
-        <span class="details">@Date.ToString("MM/dd/yyyy")</span>
-    </p>
+        <p>
+            <span>Conducting:</span>
+            <span class="details">@Conducting</span>
+        </p>
 
-    <p>
-        <span>Conducting:</span>
-        <span class="details">@Conducting</span>
-    </p>
+        <p>
+            <span>Opening Hymn:</span>
+            <span class="details">@OHymn</span>
+        </p>
 
-    <p>
-        <span>Opening Hymn:</span>
-        <span class="details">@OHymn</span>
-    </p>
+        <p>
+            <span>Opening Prayer:</span>
+            <span class="details">@OPrayer</span>
+        </p>
 
-    <p>
-        <span>Opening Prayer:</span>
-        <span class="details">@OPrayer</span>
-    </p>
+        <p>
+            <span>Sacrament Hymn:</span>
+            <span class="details">@SHymn</span>
+        </p>
 
-    <p>
-        <span>Sacrament Hymn:</span>
-        <span class="details">@SHymn</span>
-    </p>
+        <p>
+            <span>Intermediate Hymn:</span>
+            <span class="details">@IHymn</span>
+        </p>
 
-    <p>
-        <span>Intermediate Hymn:</span>
-        <span class="details">@IHymn</span>
-    </p>
+        <p>
+            <span>Closing Hymn:</span>
+            <span class="details">@CHymn</span>
+        </p>
 
-    <p>
-        <span>Closing Hymn:</span>
-        <span class="details">@CHymn</span>
-    </p>
+        <p>
+            <span>Closing Prayer:</span>
+            <span class="details">@CPrayer</span>
+        </p>
 
-    <p>
-        <span>Closing Prayer:</span>
-        <span class="details">@CPrayer</span>
-    </p>
-
-    <input type="hidden" name="meetingId" value="@meetingId" />
+        <input type="hidden" name="meetingId" value="@meetingId" />
+    </div>
 
 </fieldset>
 
