@@ -13,6 +13,10 @@
     var meetingId = "";
     var dateString = "04/04/1999";
 
+    //Make a collection of speakers
+    //var speakerArray ?
+    //collection of speakers?
+
     if (!IsPost)
     {
         if (!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].IsInt())
@@ -35,19 +39,11 @@
             else
             {
                 Validation.AddFormError("No plan was selected.");
-                // If you are using a version of ASP.NET Web Pages 2 that's
-                // earlier than the RC release, comment out the preceding
-                // statement and uncomment the following one.
-                //ModelState.AddFormError("No movie was selected.");
             }
         }
         else
         {
             Validation.AddFormError("No plan was selected.");
-            // If you are using a version of ASP.NET Web Pages 2 that's
-            // earlier than the RC release, comment out the preceding
-            // statement and uncomment the following one.
-            //ModelState.AddFormError("No movie was selected.");
         }
     }
 

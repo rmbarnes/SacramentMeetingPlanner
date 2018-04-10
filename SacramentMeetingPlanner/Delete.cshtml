@@ -53,8 +53,12 @@
     {
         meetingId = Request.Form["meetingId"];
         var db = Database.Open("Meetings");
+        var deleteSpeakers = "DELETE FROM Speaker WHERE MeetingID = @0";
+        db.Execute(deleteSpeakers, meetingId);
         var deleteCommand = "DELETE FROM Meeting WHERE ID = @0";
         db.Execute(deleteCommand, meetingId);
+
+
         Response.Redirect("~/Plans");
         //Add delete statement for the speakers table via foriegn key of meetingid
     }
