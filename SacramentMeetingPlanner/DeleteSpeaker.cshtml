@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Delete Speaker";
+
+    var Name = "";
+    var Topic = "";
+    var speakerId = "";
+    var MeetingID = "";
+
+    if (!IsPost)
+    {
+        if (!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].AsInt() > 0)
+        {
+            speakerId = Request.QueryString["ID"];
+            var db = Database.Open("Meetings");
+            var dbCommand = "SELECT * FROM Speaker WHERE ID = @0";
+            var row = db.QuerySingle(dbCommand, speakerId);
+            if (row != null)
+            {
+                Name = row.Name;
+                Topic = row.Topic;
+                MeetingID = row.MeetingID.ToString();
+            }
+            else
+            {
+                Validation.AddFormError("No Speakers were found for that meeting.");
+                // If you are using a version of ASP.NET Web Pages 2 that's
+                // earlier than the RC release, comment out the preceding
+                // statement and uncomment the following one.
+                //ModelState.AddFormError("No movie was found for that ID.");
+            }
+        }
+        else
+        {
+            Validation.AddFormError("No speakers were found for that meeting.");
+            // If you are using a version of ASP.NET Web Pages 2 that's
+            // earlier than the RC release, comment out the preceding
+            // statement and uncomment the following one.
+            //ModelState.AddFormError("No movie was found for that ID.");
+        }
+    }
+
+    if (IsPost && !Request["buttonDelete"].IsEmpty())
+    {
+        speakerId = Request.Form["speakerId"];
+        var db = Database.Open("Meetings");
+
+        //Grab the meetingID before I delete the speaker
+        int meetingKey;
+        var selectCommand = "SELECT MeetingId FROM Speaker WHERE ID = @0";
+        var row = db.QuerySingle(selectCommand, speakerId);
+
+        meetingKey = @row.meetingID;
+
+        var deleteSpeakers = "DELETE FROM Speaker WHERE ID = @0";
+        db.Execute(deleteSpeakers, speakerId);
+
+
+        //I need to grab the meeting id of the speaker that is about to be deleted, and put it in here.
+        Response.Redirect("~/Speakers?id=" + meetingKey);
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+}
+
+<h2>Delete Speaker</h2>
+@Html.ValidationSummary()
+<p><a href="~/Speakers?id=@MeetingID">Return to list of Speakers</a></p>
+
+<form method="post">
+    <fieldset>
+        <legend>Sacrament Meeting Details</legend>
+
+        <p>
+            <span>Speaker:</span>
+            <span>@Name</span>
+        </p>
+
+        <p>
+            <span>Topic:</span>
+            <span>@Topic</span>
+        </p>
+
+        <input type="hidden" name="speakerId" value="@speakerId" />
+        <input type="hidden" name="MeetingID" value="@MeetingID" />
+        <p><input type="submit" class="deletePageButton" name="buttonDelete" value="Delete Speaker" /></p>
+    </fieldset>
+</form>

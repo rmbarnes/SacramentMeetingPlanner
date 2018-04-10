@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Edit Speaker";
+
+    var Name = "";
+    var Topic = "";
+    var MeetingID = "";
+    var SpeakerID = "";
+
+    if (!IsPost)
+    {
+        if (!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].IsInt())
+        {
+            SpeakerID = Request.QueryString["ID"];
+            var db = Database.Open("Meetings");
+            var dbCommand = "SELECT * FROM Speaker WHERE ID = @0";
+            var row = db.QuerySingle(dbCommand, SpeakerID);
+
+            if (row != null)
+            {
+                Name = row.Name;
+                Topic = row.Topic;
+                MeetingID = row.MeetingID.ToString();
+            }
+            else
+            {
+                Validation.AddFormError("No speaker was selected.");
+            }
+        }
+        else
+        {
+            Validation.AddFormError("No speaker was selected.");
+        }
+    }
+
+    if (IsPost)
+    {
+        Validation.RequireField("Name", "Wait, what's their name?");
+        Validation.RequireField("Topic", "What are they speaking about?");
+        Validation.RequireField("SpeakerID", "No speaker ID was submitted!");
+        Validation.RequireField("MeetingID", "No Meeting ID was submitted!");
+
+        Name = Request.Form["Name"];
+        Topic = Request.Form["Topic"];
+
+        SpeakerID = Request.Form["SpeakerID"];
+        MeetingID = Request.Form["MeetingID"];
+
+        if (Validation.IsValid())
+        {
+            var db = Database.Open("Meetings");
+            var updateCommand = "UPDATE Speaker SET Name=@0, Topic=@1 WHERE Id=@2";
+            db.Execute(updateCommand, Name, Topic, SpeakerID);
+            Response.Redirect("~/Speakers?id="+MeetingID);
+        }
+    }
+}
+
+<h2>Edit Speaker and Topic</h2>
+<p><a href="~/Plans">Return to Plans</a></p>
+@Html.ValidationSummary()
+<form method="post">
+    <fieldset>
+        <legend>Speaker Details</legend>
+
+        <p>
+            <label for="Name">Speaker's Name:</label>
+            <input type="text" name="Name" value="@Name" />
+        </p>
+
+        <p>
+            <label for="Topic">Their Topic:</label>
+            <input type="text" name="Topic" value="@Topic" />
+        </p>
+
+        <input type="hidden" name="MeetingID" value="@MeetingID" />
+        <input type="hidden" name="SpeakerID" value="@SpeakerID" />
+
+        <p><input type="submit" name="buttonSubmit" value="Submit Changes" /></p>
+    </fieldset>
+</form>
+

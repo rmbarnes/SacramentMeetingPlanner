@@ -93,12 +93,15 @@
     <Content Include="App_Data\Meetings.sdf" />
     <Content Include="Create.cshtml" />
     <Content Include="Delete.cshtml" />
+    <Content Include="DeleteSpeaker.cshtml" />
     <None Include="packages.config" />
     <Content Include="Plans.cshtml" />
     <Content Include="Styles\Planner.css" />
     <Content Include="Update.cshtml" />
     <Content Include="View.cshtml" />
     <Content Include="AddSpeaker.cshtml" />
+    <Content Include="Speakers.cshtml" />
+    <Content Include="UpdateSpeaker.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

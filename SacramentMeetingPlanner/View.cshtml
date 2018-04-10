@@ -12,6 +12,7 @@
     var Date = DateTime.Now;
     var meetingId = "";
     var dateString = "04/04/1999";
+    WebGrid grid = new WebGrid();
 
     //Make a collection of speakers
     //var speakerArray ?
@@ -25,6 +26,12 @@
             var db = Database.Open("Meetings");
             var dbCommand = "SELECT * FROM Meeting WHERE ID = @0";
             var row = db.QuerySingle(dbCommand, meetingId);
+
+            var selectCommand = "SELECT * FROM Speaker WHERE MeetingId = " + meetingId;
+            var searchTerm = "";
+
+            var selectedData = db.Query(selectCommand, searchTerm);
+            grid = new WebGrid(source: selectedData, defaultSort: "MeetingId");
 
             if (row != null)
             {
@@ -49,6 +56,7 @@
 
     if (IsPost)
     {
+        /*
         Validation.RequireField("OHymn", "Opening Hymn is a required field");
         Validation.RequireField("OPrayer", "Don't forget to invite someone to say the opening prayer!");
         Validation.RequireField("Conducting", "Someone will need to conduct the meeting");
@@ -78,6 +86,7 @@
             db.Execute(updateCommand, OHymn, CHymn, SHymn, IHymn, Conducting, Date, OPrayer, CPrayer, meetingId);
             Response.Redirect("~/Plans");
         }
+        */
     }
 }
 
@@ -113,24 +122,26 @@
         </p>
 
         @{/*
-            foreach (var speaker in Speakers)
+            foreach (var row in grid.Row)
             {
             <p>
                 <span>Speaker:</span>
-                <span class="details">@speaker</span>
+                <span class="details">@row.Speaker</span>
             </p>
             <p>
                 <span>Topic:</span>
-                <span class="details">@topic</span>
+                <span class="details">@row.Topic</span>
             </p>
 
             }*/
         }
 
+        @if (IHymn != "") {
         <p>
             <span>Intermediate Hymn:</span>
             <span class="details">@IHymn</span>
         </p>
+        }
 
         <p>
             <span>Closing Hymn:</span>
@@ -145,6 +156,18 @@
         <input type="hidden" name="meetingId" value="@meetingId" />
     </div>
 
+    <h3>Speakers</h3>
+    <div>
+        @grid.GetHtml(
+                        tableStyle: "grid",
+                        headerStyle: "head",
+                        alternatingRowStyle: "alt",
+                        columns: grid.Columns(
+                                       // grid.Column(format: @<a href="~/View?id=@item.ID">View</a>),
+                                        grid.Column("Name"),
+                                        grid.Column("Topic"))
+                      )
+    </div>
 </fieldset>
 
 

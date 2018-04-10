@@ -36,19 +36,11 @@
             else
             {
                 Validation.AddFormError("No plan was selected.");
-                // If you are using a version of ASP.NET Web Pages 2 that's
-                // earlier than the RC release, comment out the preceding
-                // statement and uncomment the following one.
-                //ModelState.AddFormError("No movie was selected.");
             }
         }
         else
         {
             Validation.AddFormError("No plan was selected.");
-            // If you are using a version of ASP.NET Web Pages 2 that's
-            // earlier than the RC release, comment out the preceding
-            // statement and uncomment the following one.
-            //ModelState.AddFormError("No movie was selected.");
         }
     }
 
@@ -65,9 +57,11 @@
 
         dateString = Request.Form["Date"];
 
-        try {
+        try
+        {
             Date = DateTime.Parse(dateString);
-        } catch
+        }
+        catch
         {
             Date = DateTime.Now;
         }
@@ -143,4 +137,4 @@
         <p><input type="submit" name="buttonSubmit" value="Submit Changes" /></p>
     </fieldset>
 </form>
-
+<p><a href="~/Speakers?id=@meetingId">Add Speakers</a></p>

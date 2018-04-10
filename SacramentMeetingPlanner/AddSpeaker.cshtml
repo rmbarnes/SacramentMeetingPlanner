@@ -3,8 +3,8 @@
     Page.Title = "Add Speaker";
 
     var meetingId = "";
-    var Speaker1 = "";
-    var Topic1 = "";
+    var Speaker = "";
+    var Topic = "";
 
     if (!IsPost)
     {
@@ -16,11 +16,11 @@
 
     if (IsPost)
     {
-        Validation.RequireField("Speaker1", "You need at least one speaker");
-        Validation.RequireField("Topic1", "What is their topic?");
+        Validation.RequireField("Speaker", "You need at least one speaker");
+        Validation.RequireField("Topic", "What is their topic?");
 
-        Speaker1 = Request.Form["Speaker1"];
-        Topic1 = Request.Form["Topic1"];
+        Speaker = Request.Form["Speaker"];
+        Topic = Request.Form["Topic"];
 
         meetingId = Request.Form["meetingId"];
 
@@ -28,8 +28,8 @@
         {
             var db = Database.Open("Meetings");
             var insertCommand = "INSERT INTO Speaker (Name, Topic, MeetingID) VALUES(@0, @1, @2)";
-            db.Execute(insertCommand, Speaker1, Topic1, meetingId);
-            Response.Redirect("~/Plans");
+            db.Execute(insertCommand, Speaker, Topic, meetingId);
+            Response.Redirect("~/Speakers?id=" + meetingId);
         }
     }
 }
@@ -38,16 +38,16 @@
 @Html.ValidationSummary()
 <form method="post">
     <fieldset>
-        <legend>List of Speakers</legend>
+        <legend>Speaker Details</legend>
 
         <p>
-            <label for="Speaker1">Speaker1:</label>
-            <input type="text" name="Speaker1" value="@Speaker1" />
+            <label for="Speaker">Speaker:</label>
+            <input type="text" name="Speaker" value="@Speaker" />
         </p>
 
         <p>
-            <label for="Topic1">Topic1:</label>
-            <input type="text" name="Topic1" value="@Topic1" />
+            <label for="Topic">Topic:</label>
+            <input type="text" name="Topic" value="@Topic" />
         </p>
 
         <input type="hidden" name="meetingId" value="@meetingId" />
@@ -55,4 +55,3 @@
         <p><input type="submit" name="buttonSubmit" value="Submit Changes" /></p>
     </fieldset>
 </form>
-
