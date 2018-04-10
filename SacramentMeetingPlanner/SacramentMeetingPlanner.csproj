@@ -98,6 +98,7 @@
     <Content Include="Styles\Planner.css" />
     <Content Include="Update.cshtml" />
     <Content Include="View.cshtml" />
+    <Content Include="AddSpeaker.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
