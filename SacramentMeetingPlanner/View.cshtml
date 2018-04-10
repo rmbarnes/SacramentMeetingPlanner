@@ -86,7 +86,7 @@
 @Html.ValidationSummary()
 <fieldset class="detailPage">
     <legend>Sacrament Meeting Details</legend>
-    <div >
+    <div>
         <p>
             <span>Date:</span>
             <span class="details">@Date.ToString("MM/dd/yyyy")</span>
@@ -111,6 +111,21 @@
             <span>Sacrament Hymn:</span>
             <span class="details">@SHymn</span>
         </p>
+
+        @{/*
+            foreach (var speaker in Speakers)
+            {
+            <p>
+                <span>Speaker:</span>
+                <span class="details">@speaker</span>
+            </p>
+            <p>
+                <span>Topic:</span>
+                <span class="details">@topic</span>
+            </p>
+
+            }*/
+        }
 
         <p>
             <span>Intermediate Hymn:</span>

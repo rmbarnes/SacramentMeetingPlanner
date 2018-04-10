@@ -3,12 +3,12 @@
     Page.Title = "Create Plan";
 
     Validation.RequireField("OHymn", "You must enter an Opening Hymn");
-    Validation.RequireField("CHymn", "Closing Hymn is required");
-    Validation.RequireField("SHymn", "You haven't entered a Sacrament Hymn");
-    Validation.RequireField("Conducting", "Conductor is required");
+    Validation.RequireField("CHymn", "It is nice to include a closing hymn");
+    Validation.RequireField("SHymn", "You will need to choose a hymn to prepare for the Sacrament");
+    Validation.RequireField("Conducting", "Someone will need to conduct the meeting");
     Validation.RequireField("Date", "Date is required");
-    Validation.RequireField("CPrayer", "Closing Prayer is required");
-    Validation.RequireField("OPrayer", "Opening Prayer is required");
+    Validation.RequireField("CPrayer", "You must select someone for the closing prayer");
+    Validation.RequireField("OPrayer", "Don't forget to invite someone to say the opening prayer!");
 
     var OHymn = "";
     var CHymn = "";
