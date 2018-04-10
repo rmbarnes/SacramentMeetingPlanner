@@ -56,37 +56,7 @@
 
     if (IsPost)
     {
-        /*
-        Validation.RequireField("OHymn", "Opening Hymn is a required field");
-        Validation.RequireField("OPrayer", "Don't forget to invite someone to say the opening prayer!");
-        Validation.RequireField("Conducting", "Someone will need to conduct the meeting");
-        Validation.RequireField("SHymn", "You will need to choose a hymn to prepare for the Sacrament");
-        Validation.RequireField("CHymn", "It is nice to include a closing hymn");
-        Validation.RequireField("CPrayer", "You must select someone for the closing prayer");
-
-        Validation.RequireField("meetingId", "No meeting ID was submitted!");
-
-        dateString = Request.Form["Date"];
-
-        Date = DateTime.Parse(dateString);
-        OHymn = Request.Form["OHymn"];
-        OPrayer = Request.Form["OPrayer"];
-        Conducting = Request.Form["Conducting"];
-        SHymn = Request.Form["SHymn"];
-        IHymn = Request.Form["IHymn"];
-        CHymn = Request.Form["CHymn"];
-        CPrayer = Request.Form["CPrayer"];
-
-        meetingId = Request.Form["meetingId"];
-
-        if (Validation.IsValid())
-        {
-            var db = Database.Open("Meetings");
-            var updateCommand = "UPDATE Meeting SET OHymn=@0, CHymn=@1, SHymn=@2, IHymn=@3, Conducting=@4, Date=@5, OPrayer=@6, CPrayer=@7, WHERE Id=@8";
-            db.Execute(updateCommand, OHymn, CHymn, SHymn, IHymn, Conducting, Date, OPrayer, CPrayer, meetingId);
-            Response.Redirect("~/Plans");
-        }
-        */
+      
     }
 }
 
@@ -163,7 +133,6 @@
                         headerStyle: "head",
                         alternatingRowStyle: "alt",
                         columns: grid.Columns(
-                                       // grid.Column(format: @<a href="~/View?id=@item.ID">View</a>),
                                         grid.Column("Name"),
                                         grid.Column("Topic"))
                       )
